@@ -10,9 +10,10 @@
 </header>
 <body>
 <div id="container">
-	<!-- <div>
-		<button type="button">Check</button>
-	</div> -->
+	<div>
+		<!--<button type="button">Check</button>-->
+		<p id="clock"></p>
+	</div>
 	<br>
 	<div>
 		<span id="route">Route</span>: <span id="eta" style="padding: 10px;">Time</span>
@@ -20,6 +21,7 @@
 
 	<script>
 		$( document ).ready (ajaxMe());
+		$( document ).ready (getClock());
 
 		function ajaxMe() {
 			setInterval(async () => {
@@ -39,6 +41,7 @@
 					}
 				});
 			}, 1 * 60 * 1000);
+
 			$.get("/getTime", {}, function(results) {
 				$('#route').text(results.route);
 				if(results.eta < 10) {
@@ -55,6 +58,14 @@
 					$('#eta').text(results.eta);
 				}
 			});
+		}
+
+		function getClock() {
+			setInterval(async () => {
+				$.get("/clock", {}, function(res) {
+					$('#clock').text(res);
+				});
+			}, 1000);
 		}
 	</script>
 </div>

@@ -2,6 +2,7 @@ const puppeteer = require('puppeteer');
 const devices = require('puppeteer/DeviceDescriptors');
 const iPhone = devices['iPad landscape'];
 const sleep = require('sleep');
+var dateFormat = require('dateformat');
 
 var express = require('express');
 var app = express();
@@ -41,7 +42,7 @@ async function getTime(page){
 
 // (async () => {
 //     // On normal computer
-//     // const browser = await puppeteer.launch({headless: true}});
+//     // const browser = await puppeteer.launch({headless: true});
     
 //     // On Raspberry Pi
 //     const browser = await puppeteer.launch({executablePath: '/usr/bin/chromium-browser'});
@@ -67,7 +68,7 @@ async function getTime(page){
 
 async function get_web() {
     // On normal computer
-    // const browser = await puppeteer.launch({headless: true}});
+    // const browser = await puppeteer.launch({headless: true});
     
     // On Raspberry Pi
     const browser = await puppeteer.launch({executablePath: '/usr/bin/chromium-browser'});
@@ -107,6 +108,9 @@ app.get('/getTime', async (req, res) => {
     }
 });
 
+app.get('/clock', function(req, res) {
+    res.send(dateFormat(new Date(), "dddd, mmmm dS, yyyy, h:MM:ss TT"));
+});
 
 app.listen(4000, function(){
     console.log('Server is running on port 4000');
