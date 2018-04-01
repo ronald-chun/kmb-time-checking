@@ -68,10 +68,10 @@ async function getTime(page){
 
 async function get_web() {
     // On normal computer
-    // const browser = await puppeteer.launch({headless: true});
+    const browser = await puppeteer.launch({headless: true});
     
     // On Raspberry Pi
-    const browser = await puppeteer.launch({executablePath: '/usr/bin/chromium-browser'});
+    // const browser = await puppeteer.launch({executablePath: '/usr/bin/chromium-browser'});
     const page = await browser.newPage();
     var eta = '';
 
